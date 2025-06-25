@@ -48,10 +48,16 @@
     .popup h2 {
       font-size: 26px;
       margin-bottom: 25px;
+      text-align: center;
+      line-height: 1.5;
+    }
+
+    .gradient-text {
       background: linear-gradient(90deg, #c471ed, #f64f59);
-      color: transparent;
       -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
       animation: hueShift 6s infinite linear;
+      display: inline-block;
     }
 
     @keyframes hueShift {
@@ -141,16 +147,19 @@
 <body>
 
   <div class="popup" id="popupBox">
-    <h2>😊Günaydın Müzeyyen💫<br>💫Bugün Nasıl Hissediyorsun?😊</h2>
+    <h2>
+      😊 <span class="gradient-text">Günaydın Müzeyyen</span> 💫<br>
+      💫 <span class="gradient-text">Nasıl Hissediyorsun?</span> 😊
+    </h2>
     <div class="buttons">
-      <button class="btn good" onclick="showMessage()">Güzel</button>
-      <button class="btn bad" id="badBtn">Kötü</button>
+      <button class="btn good" onclick="showMessage()">GÜZEL</button>
+      <button class="btn bad" id="badBtn">KÖTÜ</button>
     </div>
-    <div id="message">🌸Umarım Hergün Böyle Mutlu Hissedersin!💖</div>
+    <div id="message">🌸GÜZEL GÜNLERİ HAKEDİYORSUN💖</div>
   </div>
 
   <div id="heartNotification" class="notification">
-    💗Seni Mutluluğa Yönlendiriyorum!💗<br> ...Lütfen Biraz Bekle...
+    💗<br>Seni Mutluluğa Yönlendiriyorum!💗<br> ...Lütfen Biraz Bekle...
   </div>
 
   <script>
