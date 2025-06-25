@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+  <meta charset="UTF-8" />
+  <title>Duygu Sayfası</title>
+  <style>
+    body {
+      margin: 0;
+      font-family: 'Segoe UI', sans-serif;
+      background: linear-gradient(135deg, #e0c3fc, #8ec5fc);
+      height: 100vh;
+      overflow: hidden;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+
+    .emoji {
+      position: absolute;
+      font-size: 30px;
+      animation: fall 6s linear infinite;
+      pointer-events: none;
+    }
+
+    @keyframes fall {
+      0% { top: -10%; opacity: 0; }
+      10% { opacity: 1; }
+      100% { top: 110%; opacity: 0; }
+    }
+
+    .popup {
+      z-index: 10;
+      background: rgba(240, 224, 255, 0.8);
+      border: 3px solid #d6b3ff;
+      border-radius: 25px;
+      padding: 50px;
+      box-shadow: 0 0 25px #cba7f6;
+      backdrop-filter: blur(10px);
+      text-align: center;
+      animation: popupPulse 3s ease-in-out infinite;
+    }
+
+    @keyframes popupPulse {
+      0%, 100% { box-shadow: 0 0 20px #cba7f6; }
+      50% { box-shadow: 0 0 35px #e0b3ff; }
+    }
+
+    .popup h2 {
+      font-size: 26px;
+      background: linear-gradient(90deg, #c471ed, #f64f59);
+      color: transparent;
+      -webkit-background-clip: text;
+      animation: hueShift 6s infinite linear;
+    }
+
+    @keyframes hueShift {
+      0% { filter: hue-rotate(0deg); }
+      100% { filter: hue-rotate(360deg); }
+    }
+
+    .buttons {
+      margin-top: 30px;
+      display: flex;
+      justify-content: center;
+      gap: 30px;
+      flex-wrap: wrap;
+    }
+
+    .btn {
+      padding: 14px 30px;
+      border: none;
+      border-radius: 30px;
+      font-size: 17px;
+      font-weight: bold;
+      cursor: pointer;
+      animation: glow 1.2s infinite alternate;
+      transition: transform 0.2s ease;
+    }
+
+    .btn:hover {
+      transform: scale(1.05);
+    }
+
+    .good {
+      background: #ff4d4d;
+      color: white;
+    }
+
+    .bad {
+      background: #222;
+      color: #eee;
+      position: relative;
+    }
+
+    @keyframes glow {
+      from { box-shadow: 0 0 10px #ccc; }
+      to { box-shadow: 0 0 20px #fff; }
+    }
+
+    #message {
+      margin-top: 30px;
+      padding: 15px 25px;
+      font-size: 20px;
+      background: #f3e4ff;
+      color: #a037bb;
+      border-radius: 20px;
+      box-shadow: 0 0 15px #e0b3ff;
+      display: none;
+      animation: fadeIn 0.8s ease forwards;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: scale(0.95); }
+      to { opacity: 1; transform: scale(1); }
+    }
+
+    .notification {
+      position: fixed;
+      top: 40%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      background: rgba(255, 220, 240, 0.9);
+      padding: 25px 40px;
+      border-radius: 30px;
+      font-size: 20px;
+      color: #c9184a;
+      font-weight: bold;
+      text-align: center;
+      animation: heartbeat 1.2s infinite ease-in-out;
+      box-shadow: 0 0 25px #ff80ab;
+      z-index: 9999;
+      display: none;
+    }
+
+    @keyframes heartbeat {
+      0% { transform: translate(-50%, -50%) scale(1); }
+      25% { transform: translate(-50%, -50%) scale(1.05); }
+      50% { transform: translate(-50%, -50%) scale(1); }
+      75% { transform: translate(-50%, -50%) scale(1.05); }
+      100% { transform: translate(-50%, -50%) scale(1); }
+    }
+  </style>
+</head>
+<body>
+
+  <div class="popup" id="popupBox">
+    <h2>Bugün nasıl hissediyorsun?</h2>
+    <div class="buttons">
+      <button class="btn good" onclick="showMessage()">Güzel</button>
+      <button class="btn bad" id="badBtn">Kötü</button>
+    </div>
+    <div id="message">🌸 Umarım hep böyle mutlu hissedersin! 💖</div>
+  </div>
+
+  <div id="heartNotification" class="notification">
+    💗 Sizi mutluluğa yönlendiriyorum...<br>Lütfen bekleyin.
+  </div>
+
+  <script>
+    const emojis = ["🌸", "💖", "✨", "😊", "💫", "💕"];
+    const emojiRain = () => {
+      const emoji = document.createElement("div");
+      emoji.classList.add("emoji");
+      emoji.innerText = emojis[Math.floor(Math.random() * emojis.length)];
+      emoji.style.left = Math.random() * 100 + "vw";
+      emoji.style.animationDuration = (3 + Math.random() * 2) + "s";
+      emoji.style.fontSize = (20 + Math.random() * 30) + "px";
+      document.body.appendChild(emoji);
+      setTimeout(() => emoji.remove(), 6000);
+    };
+    setInterval(emojiRain, 180);
+
+    function showMessage() {
+      const msg = document.getElementById("message");
+      msg.style.display = "inline-block";
+    }
+
+    const badBtn = document.getElementById("badBtn");
+    const notification = document.getElementById("heartNotification");
+
+    badBtn.addEventListener("click", () => {
+      notification.style.display = "block";
+      setTimeout(() => {
+        window.open("https://wa.me/905349898821", "_blank");
+        notification.style.display = "none";
+      }, 5500);
+    });
+  </script>
+
+</body>
+</html>
