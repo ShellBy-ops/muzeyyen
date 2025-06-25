@@ -2,17 +2,19 @@
 <html lang="tr">
 <head>
   <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Duygu Sayfası</title>
   <style>
     body {
       margin: 0;
       font-family: 'Segoe UI', sans-serif;
       background: linear-gradient(135deg, #e0c3fc, #8ec5fc);
-      height: 100vh;
-      overflow: hidden;
+      min-height: 100vh;
+      overflow-x: hidden;
       display: flex;
       justify-content: center;
       align-items: center;
+      padding: 20px;
     }
 
     .emoji {
@@ -29,24 +31,19 @@
     }
 
     .popup {
-      z-index: 10;
-      background: rgba(240, 224, 255, 0.8);
-      border: 3px solid #d6b3ff;
+      background: rgba(240, 224, 255, 0.9);
+      border: 2px solid #d6b3ff;
       border-radius: 25px;
-      padding: 50px;
-      box-shadow: 0 0 25px #cba7f6;
-      backdrop-filter: blur(10px);
+      padding: 30px 20px;
+      width: 100%;
+      max-width: 400px;
+      box-shadow: 0 0 20px #cba7f6;
       text-align: center;
-      animation: popupPulse 3s ease-in-out infinite;
-    }
-
-    @keyframes popupPulse {
-      0%, 100% { box-shadow: 0 0 20px #cba7f6; }
-      50% { box-shadow: 0 0 35px #e0b3ff; }
     }
 
     .popup h2 {
-      font-size: 26px;
+      font-size: 22px;
+      margin-bottom: 20px;
       background: linear-gradient(90deg, #c471ed, #f64f59);
       color: transparent;
       -webkit-background-clip: text;
@@ -59,20 +56,21 @@
     }
 
     .buttons {
-      margin-top: 30px;
       display: flex;
-      justify-content: center;
-      gap: 30px;
       flex-wrap: wrap;
+      justify-content: center;
+      gap: 15px;
+      margin-top: 20px;
     }
 
     .btn {
-      padding: 14px 30px;
+      padding: 12px 20px;
+      font-size: 16px;
+      border-radius: 25px;
       border: none;
-      border-radius: 30px;
-      font-size: 17px;
-      font-weight: bold;
       cursor: pointer;
+      font-weight: 600;
+      width: 130px;
       animation: glow 1.2s infinite alternate;
       transition: transform 0.2s ease;
     }
@@ -89,7 +87,6 @@
     .bad {
       background: #222;
       color: #eee;
-      position: relative;
     }
 
     @keyframes glow {
@@ -98,38 +95,29 @@
     }
 
     #message {
-      margin-top: 30px;
-      padding: 15px 25px;
-      font-size: 20px;
+      margin-top: 25px;
+      padding: 12px 20px;
+      font-size: 18px;
       background: #f3e4ff;
       color: #a037bb;
       border-radius: 20px;
-      box-shadow: 0 0 15px #e0b3ff;
       display: none;
-      animation: fadeIn 0.8s ease forwards;
-    }
-
-    @keyframes fadeIn {
-      from { opacity: 0; transform: scale(0.95); }
-      to { opacity: 1; transform: scale(1); }
     }
 
     .notification {
       position: fixed;
-      top: 40%;
+      top: 45%;
       left: 50%;
       transform: translate(-50%, -50%);
-      background: rgba(255, 220, 240, 0.9);
-      padding: 25px 40px;
-      border-radius: 30px;
-      font-size: 20px;
-      color: #c9184a;
-      font-weight: bold;
+      background: rgba(255, 220, 240, 0.95);
+      padding: 20px 30px;
+      border-radius: 25px;
+      font-size: 18px;
       text-align: center;
-      animation: heartbeat 1.2s infinite ease-in-out;
-      box-shadow: 0 0 25px #ff80ab;
-      z-index: 9999;
+      box-shadow: 0 0 20px #ff80ab;
       display: none;
+      z-index: 9999;
+      animation: heartbeat 1.2s infinite ease-in-out;
     }
 
     @keyframes heartbeat {
@@ -138,6 +126,10 @@
       50% { transform: translate(-50%, -50%) scale(1); }
       75% { transform: translate(-50%, -50%) scale(1.05); }
       100% { transform: translate(-50%, -50%) scale(1); }
+    }
+
+    @media (max-width: 480px) {
+      .btn { width: 100%; }
     }
   </style>
 </head>
@@ -171,8 +163,7 @@
     setInterval(emojiRain, 180);
 
     function showMessage() {
-      const msg = document.getElementById("message");
-      msg.style.display = "inline-block";
+      document.getElementById("message").style.display = "inline-block";
     }
 
     const badBtn = document.getElementById("badBtn");
